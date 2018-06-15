@@ -42,3 +42,8 @@ dependencies {
     implementation project(':entity')
     implementation project(':libs')
 }
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
