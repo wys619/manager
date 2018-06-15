@@ -17,6 +17,9 @@ class SplashActivity : BaseActivity() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Handler().postDelayed({
+            if (isFinishing) {
+                return@postDelayed
+            }
             Navigation.toLoginActivity(this)
             finish()
         }, 2000)

@@ -7,13 +7,15 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
-import cn.woyeshi.entity.annotations.Autowired
+import cn.woyeshi.entity.beans.manager.LoginInfo
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.iViews.ILoginView
-import cn.woyeshi.presenterimpl.presenters.ILoginPresenter
+import cn.woyeshi.presenterimpl.presenters.LoginService
+import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.toast
 
 class LoginActivity : BaseActivity(), ILoginView {
 
@@ -22,8 +24,7 @@ class LoginActivity : BaseActivity(), ILoginView {
         val REQUEST_CODE_TO_REGISTER_ACTIVITY = 1002
     }
 
-    @Autowired
-    private val loginPresenter: ILoginPresenter? = null
+    private var loginPresenter: LoginService<ILoginView> = LoginService(this)
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_login
@@ -53,9 +54,25 @@ class LoginActivity : BaseActivity(), ILoginView {
         btnLogin.onClick {
             val userName = inputLayout1.getText().trim()
             val password = inputLayout2.getText().trim()
-            loginPresenter?.login(userName, password)
-            Navigation.toMainActivity(this@LoginActivity)
-            finish()
+            addSubscription(loginPresenter.login(userName, password)
+                    .subscribeWith(object : DisposableObserver<LoginInfo>() {
+                        override fun onComplete() {
+                            toast("onComplete()")
+                            Navigation.toMainActivity(this@LoginActivity)
+                            finish()
+                        }
+
+                        override fun onNext(t: LoginInfo) {
+                            toast(" onNext()")
+                        }
+
+                        override fun onError(e: Throwable) {
+                            e.printStackTrace()
+                            toast(" onError()")
+                        }
+
+                    }))
+
         }
 
     }
