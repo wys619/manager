@@ -104,6 +104,7 @@
                         <CheckBox
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
                             android:checked="true"
                             android:text="记住密码"
                             android:textColor="@color/n_gray_2"

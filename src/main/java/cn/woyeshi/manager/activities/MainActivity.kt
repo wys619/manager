@@ -12,7 +12,6 @@ class MainActivity : BaseActivity() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         initViews()
-        showLoading("正在处理……", true)
     }
 
     private fun initViews() {

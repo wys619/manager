@@ -7,24 +7,27 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
+import cn.woyeshi.entity.Constants
+import cn.woyeshi.entity.annotations.Autowired
 import cn.woyeshi.entity.beans.manager.LoginInfo
+import cn.woyeshi.entity.utils.Logger
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
-import cn.woyeshi.presenterimpl.iViews.ILoginView
-import cn.woyeshi.presenterimpl.presenters.LoginService
-import io.reactivex.observers.DisposableObserver
+import cn.woyeshi.presenterimpl.presenters.IUserPresenter
+import cn.woyeshi.presenterimpl.presenters.IUserView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 
-class LoginActivity : BaseActivity(), ILoginView {
+class LoginActivity : BaseActivity(), IUserView {
 
     companion object {
         val REQUEST_CODE_TO_FIND_PWD_ACTIVITY = 1001
         val REQUEST_CODE_TO_REGISTER_ACTIVITY = 1002
     }
 
-    private var loginPresenter: LoginService<ILoginView> = LoginService(this)
+    @Autowired
+    private var userPresenter: IUserPresenter<IUserView>? = null
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_login
@@ -54,26 +57,22 @@ class LoginActivity : BaseActivity(), ILoginView {
         btnLogin.onClick {
             val userName = inputLayout1.getText().trim()
             val password = inputLayout2.getText().trim()
-            addSubscription(loginPresenter.login(userName, password)
-                    .subscribeWith(object : DisposableObserver<LoginInfo>() {
-                        override fun onComplete() {
-                            toast("onComplete()")
-                            Navigation.toMainActivity(this@LoginActivity)
-                            finish()
-                        }
-
-                        override fun onNext(t: LoginInfo) {
-                            toast(" onNext()")
-                        }
-
-                        override fun onError(e: Throwable) {
-                            e.printStackTrace()
-                            toast(" onError()")
-                        }
-
-                    }))
-
+            userPresenter?.login(userName, password)
         }
+    }
+
+    override fun onLoginRequestSuccess(loginInfo: LoginInfo) {
+        Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
+        when (loginInfo.code) {
+            Constants.RESULT_CODE_SUCCESS -> {
+                toast("登录成功")
+                Navigation.toMainActivity(this)
+                finish()
+            }
+        }
+    }
+
+    override fun onLoginRequestError(e: Throwable) {
 
     }
 
@@ -90,6 +89,12 @@ class LoginActivity : BaseActivity(), ILoginView {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        userPresenter?.onDestroy()
+        userPresenter = null
+    }
+
     private val textWatcher: TextWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             val userName = inputLayout1.getText()
@@ -98,12 +103,13 @@ class LoginActivity : BaseActivity(), ILoginView {
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
         }
 
     }
-
 
 }
