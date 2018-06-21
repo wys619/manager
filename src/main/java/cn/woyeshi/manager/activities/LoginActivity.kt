@@ -13,13 +13,13 @@ import cn.woyeshi.entity.beans.manager.LoginInfo
 import cn.woyeshi.entity.utils.Logger
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
-import cn.woyeshi.presenterimpl.presenters.IUserPresenter
-import cn.woyeshi.presenterimpl.presenters.IUserView
+import cn.woyeshi.presenterimpl.presenters.ILoginPresenter
+import cn.woyeshi.presenterimpl.presenters.ILoginView
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 
-class LoginActivity : BaseActivity(), IUserView {
+class LoginActivity : BaseActivity(), ILoginView {
 
     companion object {
         val REQUEST_CODE_TO_FIND_PWD_ACTIVITY = 1001
@@ -27,7 +27,7 @@ class LoginActivity : BaseActivity(), IUserView {
     }
 
     @Autowired
-    private var userPresenter: IUserPresenter<IUserView>? = null
+    private var loginPresenter: ILoginPresenter<ILoginView>? = null
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_login
@@ -49,7 +49,7 @@ class LoginActivity : BaseActivity(), IUserView {
         }
 
         //注册
-        btnRegister.onClick {
+        btnNext.onClick {
             Navigation.toRegisterActivityForResult(REQUEST_CODE_TO_REGISTER_ACTIVITY, this@LoginActivity)
         }
 
@@ -57,7 +57,7 @@ class LoginActivity : BaseActivity(), IUserView {
         btnLogin.onClick {
             val userName = inputLayout1.getText().trim()
             val password = inputLayout2.getText().trim()
-            userPresenter?.login(userName, password)
+            loginPresenter?.login(userName, password)
         }
     }
 
@@ -91,8 +91,8 @@ class LoginActivity : BaseActivity(), IUserView {
 
     override fun onDestroy() {
         super.onDestroy()
-        userPresenter?.onDestroy()
-        userPresenter = null
+        loginPresenter?.onDestroy()
+        loginPresenter = null
     }
 
     private val textWatcher: TextWatcher = object : TextWatcher {
