@@ -9,7 +9,7 @@ import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.entity.Constants
 import cn.woyeshi.entity.annotations.Autowired
-import cn.woyeshi.entity.beans.manager.LoginInfo
+import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.Logger
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
@@ -61,14 +61,12 @@ class LoginActivity : BaseActivity(), ILoginView {
         }
     }
 
-    override fun onLoginRequestSuccess(loginInfo: LoginInfo) {
-        Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
-        when (loginInfo.code) {
-            Constants.RESULT_CODE_SUCCESS -> {
-                toast("登录成功")
-                Navigation.toMainActivity(this)
-                finish()
-            }
+    override fun onLoginRequestSuccess(userInfo: List<UserInfo>) {
+        if (userInfo != null && userInfo.size == 1) {
+            Logger.i(TAG, "onLoginRequestSuccess() -> ${userInfo[0]}")
+            toast("登录成功")
+            Navigation.toMainActivity(this)
+            finish()
         }
     }
 
