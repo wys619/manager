@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
-import cn.woyeshi.entity.Constants
 import cn.woyeshi.entity.annotations.Autowired
 import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.Logger
@@ -61,17 +60,13 @@ class LoginActivity : BaseActivity(), ILoginView {
         }
     }
 
-    override fun onLoginRequestSuccess(userInfo: List<UserInfo>) {
-        if (userInfo != null && userInfo.size == 1) {
-            Logger.i(TAG, "onLoginRequestSuccess() -> ${userInfo[0]}")
+    override fun onLoginRequestSuccess(loginInfo: List<UserInfo>) {
+        if (loginInfo.size == 1) {
+            Logger.i(TAG, "onLoginRequestSuccess() -> ${loginInfo[0]}")
             toast("登录成功")
             Navigation.toMainActivity(this)
             finish()
         }
-    }
-
-    override fun onLoginRequestError(e: Throwable) {
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

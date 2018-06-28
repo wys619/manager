@@ -22,7 +22,7 @@ class SplashActivity : BaseActivity() {
             }
             Navigation.toLoginActivity(this)
             finish()
-        }, 2000)
+        }, 3000)
     }
 
     override fun isHaveTitleBar(): Boolean {
