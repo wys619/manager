@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import cn.woyeshi.base.utils.FrescoUtils
 import cn.woyeshi.base.utils.MemoryTrimmable
+import cn.woyeshi.entity.utils.ContextHolder
 
 class ManagerApplication : Application() {
 
@@ -15,6 +16,7 @@ class ManagerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ContextHolder.applicationContext = this
         //初始化图片加载框架
         FrescoUtils.initFresco(applicationContext)
     }
