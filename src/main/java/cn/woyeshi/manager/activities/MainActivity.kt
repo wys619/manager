@@ -15,7 +15,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViews() {
-        title = "Gogogo管理终端"
+        title = "go购够"
         setBackBtnVisibility(false)
     }
 
