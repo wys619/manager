@@ -5,11 +5,19 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
+import cn.woyeshi.entity.annotations.Autowired
 import cn.woyeshi.manager.R
+import cn.woyeshi.presenterimpl.presenters.IRegisterPresenter
+import cn.woyeshi.presenterimpl.presenters.IRegisterView
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.toast
 
-class RegisterActivity : BaseActivity() {
+class RegisterActivity : BaseActivity(), IRegisterView {
+
+    @Autowired
+    private var registerPresenter: IRegisterPresenter<IRegisterView>? = null
+
     override fun getContentLayoutID(): Int {
         return R.layout.activity_register
     }
@@ -34,7 +42,12 @@ class RegisterActivity : BaseActivity() {
 
         //获取验证码
         btnGetVerifyCode.onClick {
-
+            val phone = inputLayout1.getText()
+            if (TextUtils.isEmpty(phone)) {
+                toast("请先输入手机号码")
+                return@onClick
+            }
+            registerPresenter?.getVerifyCode(phone)
         }
 
         inputLayout1.addTextWatcher(textWatcher)
