@@ -6,17 +6,26 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.entity.annotations.Autowired
+import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.manager.R
-import cn.woyeshi.presenterimpl.presenters.IRegisterPresenter
 import cn.woyeshi.presenterimpl.presenters.IRegisterView
+import cn.woyeshi.presenterimpl.presenters.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseActivity(), IRegisterView {
 
+    override fun onVerifyCodeGetSuccess() {
+
+    }
+
+    override fun onRegisterSuccess(t: UserInfo) {
+
+    }
+
     @Autowired
-    private var registerPresenter: IRegisterPresenter<IRegisterView>? = null
+    private val registerPresenter: RegisterPresenter<IRegisterView> = RegisterPresenter(this)
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_register
