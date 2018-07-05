@@ -8,13 +8,12 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.entity.Constants
-import cn.woyeshi.entity.annotations.Autowired
 import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.Logger
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
-import cn.woyeshi.presenterimpl.presenters.ILoginPresenter
 import cn.woyeshi.presenterimpl.presenters.ILoginView
+import cn.woyeshi.presenterimpl.presenters.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
@@ -26,8 +25,7 @@ class LoginActivity : BaseActivity(), ILoginView {
         val REQUEST_CODE_TO_REGISTER_ACTIVITY = 1002
     }
 
-    @Autowired
-    private var loginPresenter: ILoginPresenter<ILoginView>? = null
+    private var loginPresenter: LoginPresenter<ILoginView> = LoginPresenter(this)
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_login
@@ -86,8 +84,7 @@ class LoginActivity : BaseActivity(), ILoginView {
 
     override fun onDestroy() {
         super.onDestroy()
-        loginPresenter?.onDestroy()
-        loginPresenter = null
+        loginPresenter.onDestroy()
     }
 
     private val textWatcher: TextWatcher = object : TextWatcher {
