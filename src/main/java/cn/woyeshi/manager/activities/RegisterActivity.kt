@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import cn.woyeshi.base.activities.BaseActivity
-import cn.woyeshi.entity.annotations.Autowired
 import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.manager.R
 import cn.woyeshi.presenterimpl.presenters.IRegisterView
@@ -16,15 +15,6 @@ import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseActivity(), IRegisterView {
 
-    override fun onVerifyCodeGetSuccess() {
-
-    }
-
-    override fun onRegisterSuccess(t: UserInfo) {
-
-    }
-
-    @Autowired
     private val registerPresenter: RegisterPresenter<IRegisterView> = RegisterPresenter(this)
 
     override fun getContentLayoutID(): Int {
@@ -56,7 +46,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
                 toast("请先输入手机号码")
                 return@onClick
             }
-            registerPresenter?.getVerifyCode(phone)
+            registerPresenter.getVerifyCode(phone)
         }
 
         inputLayout1.addTextWatcher(textWatcher)
@@ -76,6 +66,14 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
+    override fun onVerifyCodeGetSuccess() {
+
+    }
+
+    override fun onRegisterSuccess(t: UserInfo) {
+
     }
 
 }
