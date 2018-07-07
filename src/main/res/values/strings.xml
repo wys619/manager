@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">go购够</string>
+    <string name="string_get_verify_code">点击获取</string>
+    <string name="string_code_title">验证码：</string>
+    <string name="string_code_hint">验证码</string>
 </resources>

@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.entity.Constants
 import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.Logger
+import cn.woyeshi.entity.utils.MD5
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.presenters.ILoginView
@@ -52,12 +54,15 @@ class LoginActivity : BaseActivity(), ILoginView {
         }
 
         //登录
-        btnLogin.onClick {
+        btnLogin.setOnClickListener(View.OnClickListener {
             val userName = inputLayout1.getText().trim()
             val password = inputLayout2.getText().trim()
-            loginPresenter?.login(userName, password)
-        }
-
+            if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
+                toast("请先输入用户名或密码")
+                return@OnClickListener
+            }
+            loginPresenter.login(userName, MD5.getMD5(password.toByteArray())!!)
+        })
     }
 
     //登录成功
@@ -76,7 +81,10 @@ class LoginActivity : BaseActivity(), ILoginView {
 
                 }
                 REQUEST_CODE_TO_REGISTER_ACTIVITY -> {          //注册界面回调
-
+                    val userInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
+                    if (userInfo != null) {
+                        loginPresenter.login(userInfo.userName, userInfo.password)
+                    }
                 }
             }
         }

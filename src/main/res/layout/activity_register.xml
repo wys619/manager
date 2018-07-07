@@ -84,10 +84,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:hint="验证码"
+                            app:hint="@string/string_code_hint"
                             app:inputType="number"
                             app:maxLength="4"
-                            app:title="验证码：" />
+                            app:title="@string/string_code_title" />
 
                         <TextView
                             android:id="@+id/btnGetVerifyCode"
@@ -101,7 +101,7 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:paddingTop="5dp"
-                            android:text="点击获取"
+                            android:text="@string/string_get_verify_code"
                             android:textColor="@drawable/selector_btn_text_color_white_gray"
                             android:textSize="@dimen/text_size_t3" />
 
