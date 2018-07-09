@@ -3,4 +3,10 @@
     <string name="string_get_verify_code">点击获取</string>
     <string name="string_code_title">验证码：</string>
     <string name="string_code_hint">验证码</string>
+    <string name="string_register_activity_1">请您输入手机号码</string>
+    <string name="string_register_activity_2">手机号：</string>
+    <string name="string_register_activity_3">请您设置密码</string>
+    <string name="string_register_activity_4">密码：</string>
+    <string name="string_register_activity_5">下一步</string>
+    <string name="string_register_activity_6"><![CDATA[已有账号？点击登录>>]]></string>
 </resources>
