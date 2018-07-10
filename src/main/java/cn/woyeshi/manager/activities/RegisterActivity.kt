@@ -1,6 +1,5 @@
 package cn.woyeshi.manager.activities
 
-import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -14,6 +13,7 @@ import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.MD5
 import cn.woyeshi.entity.utils.PhoneUtils
 import cn.woyeshi.manager.R
+import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.presenters.IRegisterView
 import cn.woyeshi.presenterimpl.presenters.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
@@ -79,13 +79,18 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         initViews()
     }
 
+    override fun onBackBtnClick() {
+        Navigation.toLoginActivity(this)
+        finish()
+    }
+
 
     private fun initViews() {
         title = "注册"
 
         //返回登录
         btnLogin.onClick {
-            finish()
+            Navigation.toLoginActivity(this@RegisterActivity)
         }
 
         //提交注册
@@ -152,7 +157,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
     override fun onRegisterSuccess(t: UserInfo) {
         toast("注册成功")
         saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, t)
-        setResult(Activity.RESULT_OK)
+        Navigation.toNextRegisterActivity(this)
         finish()
     }
 

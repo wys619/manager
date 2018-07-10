@@ -51,6 +51,7 @@ class LoginActivity : BaseActivity(), ILoginView {
         //注册
         btnNext.onClick {
             Navigation.toRegisterActivityForResult(REQUEST_CODE_TO_REGISTER_ACTIVITY, this@LoginActivity)
+            finish()
         }
 
         //登录

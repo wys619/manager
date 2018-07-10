@@ -27,5 +27,10 @@ class Navigation {
             activity.startActivityForResult(intent, requestCode)
         }
 
+        fun toNextRegisterActivity(activity: Activity) {
+            val intent = Intent(activity, RegisterNextActivity::class.java)
+            activity.startActivity(intent)
+        }
+
     }
 }
