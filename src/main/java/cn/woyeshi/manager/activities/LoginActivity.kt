@@ -18,7 +18,6 @@ import cn.woyeshi.presenterimpl.presenters.ILoginView
 import cn.woyeshi.presenterimpl.presenters.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.toast
 
 class LoginActivity : BaseActivity(), ILoginView {
 

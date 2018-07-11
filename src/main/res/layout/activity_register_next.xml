@@ -9,8 +9,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,24 +58,10 @@
                         android:id="@+id/inputLayout1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hint="请您输入账号"
+                        app:hint="设置一个昵称吧~"
                         app:inputType="number"
                         app:maxLength="11"
-                        app:title="账号：" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/line_color" />
-
-                    <cn.woyeshi.base.views.InputLayoutView
-                        android:id="@+id/inputLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hint="请您输入密码"
-                        app:inputType="password"
-                        app:maxLength="16"
-                        app:title="密码：" />
+                        app:title="昵称：" />
 
                     <View
                         android:layout_width="match_parent"
@@ -127,7 +113,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:placeholderImage="@drawable/ic_user_head_default"
+            app:placeholderImage="@drawable/ic_user_choose_head"
             app:placeholderImageScaleType="fitCenter"
             app:roundAsCircle="true"
             app:roundingBorderColor="@color/white"
