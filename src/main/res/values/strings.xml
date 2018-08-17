@@ -13,4 +13,7 @@
     <string name="string_manage_phone_permission">您必须授予管理电话的权限才能正常使用App</string>
     <string name="string_location_permission_hint">您必须授予定位权限才能正常使用App</string>
     <string name="string_write_sd_card">您必须授予存储卡的读写权限才能正常使用App</string>
+    <string name="string_album">相册</string>
+    <string name="string_take_photo">拍照</string>
+    <string name="string_sd_card_not_found">没有找到存储卡</string>
 </resources>

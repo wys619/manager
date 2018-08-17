@@ -23,14 +23,15 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        Handler().postDelayed({
-//            if (isFinishing) {
-//                return@postDelayed
-//            }
-//            Navigation.toLoginActivity(this)
-//            finish()
-//        }, 2000)
         checkPermissionOrSkip()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (backFromSettingActivity) {
+            backFromSettingActivity = false
+            checkPermissionOrSkip()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
