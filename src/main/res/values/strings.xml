@@ -9,4 +9,8 @@
     <string name="string_register_activity_4">密码：</string>
     <string name="string_register_activity_5">下一步</string>
     <string name="string_register_activity_6"><![CDATA[已有账号？点击登录>>]]></string>
+    <string name="string_to_open">去打开</string>
+    <string name="string_manage_phone_permission">您必须授予管理电话的权限才能正常使用App</string>
+    <string name="string_location_permission_hint">您必须授予定位权限才能正常使用App</string>
+    <string name="string_write_sd_card">您必须授予存储卡的读写权限才能正常使用App</string>
 </resources>

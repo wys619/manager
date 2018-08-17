@@ -2,6 +2,7 @@ package cn.woyeshi.manager.utils
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import cn.woyeshi.manager.activities.*
 
 object Navigation {
@@ -29,6 +30,14 @@ object Navigation {
     fun toNextRegisterActivity(activity: Activity) {
         val intent = Intent(activity, RegisterNextActivity::class.java)
         activity.startActivity(intent)
+    }
+
+    fun toAppDefaultSetting(activity: Activity) {
+        val localIntent = Intent()
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        localIntent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+        localIntent.data = Uri.fromParts("package", activity.packageName, null)
+        activity.startActivity(localIntent)
     }
 
 }
