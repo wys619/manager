@@ -9,8 +9,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -68,11 +68,94 @@
                         android:layout_height="0.5dp"
                         android:background="@color/line_color" />
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/selector_bg_trans_gray"
+                        android:clickable="true"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView58"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical|right"
+                            android:text="性别："
+                            android:textColor="@color/n_gray_1"
+                            android:textSize="@dimen/text_size_t5"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="17dp"
+                            android:text="帅哥" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/line_color" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/selector_bg_trans_gray"
+                        android:clickable="true"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="18dp"
+                            android:gravity="center_vertical|right"
+                            android:text="生日："
+                            android:textColor="@color/n_gray_1"
+                            android:textSize="@dimen/text_size_t5"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="17dp"
+                            android:text="1995-09-14" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_right" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/line_color" />
+
                     <cn.woyeshi.base.views.InputLayoutView
                         android:id="@+id/inputLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hint="请您输入邀请码（选填）"
+                        app:hint="邀请码（选填）"
                         app:inputType="number"
                         app:title="邀请码：" />
 

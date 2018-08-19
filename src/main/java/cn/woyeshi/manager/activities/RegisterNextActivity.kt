@@ -24,6 +24,7 @@ class RegisterNextActivity : BaseActivity() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         setEditBtnVisibility(true)
         setEditBtnText("跳过")
+        setBackBtnVisibility(false)
         title = "完善资料"
         initView()
     }

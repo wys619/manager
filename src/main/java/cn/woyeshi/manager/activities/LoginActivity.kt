@@ -3,6 +3,7 @@ package cn.woyeshi.manager.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -60,17 +61,28 @@ class LoginActivity : BaseActivity(), ILoginView {
                 toast("请先输入用户名或密码")
                 return@OnClickListener
             }
-            loginPresenter.login(userName, MD5.getMD5(password.toByteArray())!!)
+            toLogin(userName, MD5.getMD5(password.toByteArray())!!)
         })
+        val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
+        if (loginInfo != null) {
+            toLogin(loginInfo.userName, loginInfo.password)
+        }
+    }
+
+    private fun toLogin(userName: String, pwd: String) {
+        showLoading("登录中……", false)
+        loginPresenter.login(userName, pwd)
     }
 
     //登录成功
     override fun onLoginRequestSuccess(loginInfo: UserInfo) {
-        Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
-        saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, loginInfo)
-        toast("登录成功")
-        Navigation.toMainActivity(this)
-        finish()
+        Handler().postDelayed({
+            Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
+            saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, loginInfo)
+            toast("登录成功")
+            Navigation.toMainActivity(this)
+            finish()
+        }, 1000L)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -90,8 +102,9 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         loginPresenter.onDestroy()
+        hideLoading()
+        super.onDestroy()
     }
 
     private val textWatcher: TextWatcher = object : TextWatcher {
