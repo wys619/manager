@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
     private fun initViews() {
-        title = "欢迎登录"
+        title = getString(R.string.title_login_activity)
         setBackBtnVisibility(false)
         inputLayout1.addTextWatcher(textWatcher)
         inputLayout2.addTextWatcher(textWatcher)
@@ -58,19 +58,19 @@ class LoginActivity : BaseActivity(), ILoginView {
             val userName = inputLayout1.getText().trim()
             val password = inputLayout2.getText().trim()
             if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
-                toast("请先输入用户名或密码")
+                toast(getString(R.string.hint_input_username_and_pwd_first))
                 return@OnClickListener
             }
             toLogin(userName, MD5.getMD5(password.toByteArray())!!)
         })
-        val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
-        if (loginInfo != null) {
-            toLogin(loginInfo.userName, loginInfo.password)
-        }
+//        val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
+//        if (loginInfo != null) {
+//            toLogin(loginInfo.userName, loginInfo.password)
+//        }
     }
 
     private fun toLogin(userName: String, pwd: String) {
-        showLoading("登录中……", false)
+        showLoading(getString(R.string.hint_login_ing), false)
         loginPresenter.login(userName, pwd)
     }
 
@@ -79,7 +79,7 @@ class LoginActivity : BaseActivity(), ILoginView {
         Handler().postDelayed({
             Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
             saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, loginInfo)
-            toast("登录成功")
+            toast(getString(R.string.string_login_success))
             Navigation.toMainActivity(this)
             finish()
         }, 1000L)
