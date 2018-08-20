@@ -57,6 +57,7 @@ dependencies {
     implementation project(':presenterimpl')
     implementation project(':entity')
     implementation project(':libs')
+    implementation project(':lib_ucrop')
 }
 kotlin {
     experimental {
