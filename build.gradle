@@ -39,10 +39,6 @@ android {
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -58,6 +54,7 @@ dependencies {
     implementation project(':entity')
     implementation project(':libs')
     implementation project(':lib_ucrop')
+    implementation project(':lib_date_picker')
 }
 kotlin {
     experimental {
