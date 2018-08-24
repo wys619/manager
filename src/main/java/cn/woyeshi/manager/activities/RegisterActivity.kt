@@ -15,14 +15,16 @@ import cn.woyeshi.entity.utils.PhoneUtils
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.presenters.IRegisterView
+import cn.woyeshi.presenterimpl.presenters.IUserView
 import cn.woyeshi.presenterimpl.presenters.RegisterPresenter
+import cn.woyeshi.presenterimpl.presenters.UserPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import java.util.*
 
-class RegisterActivity : BaseActivity(), IRegisterView {
-
-    private val registerPresenter: RegisterPresenter<IRegisterView> = RegisterPresenter(this)
+class RegisterActivity : BaseActivity(), IUserView, IRegisterView {
+    private val registerPresenter by lazy { RegisterPresenter(this) }
+    private val userPresenter by lazy { UserPresenter(this) }
     private var timerHandler: TimerHandler? = null
 
     companion object {
@@ -114,7 +116,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
                 return@onClick
             }
             val md5 = MD5.getMD5(pwd.toByteArray())
-            registerPresenter.register(phone, md5!!, code)
+            userPresenter.register(phone, md5!!, code)
         }
 
         //获取验证码
@@ -153,6 +155,17 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         }
         timerHandler?.startTimer()
     }
+
+    override fun onLoginRequestSuccess(loginInfo: UserInfo) {
+
+
+    }
+
+    override fun onUpdateUserSuccess() {
+
+
+    }
+
 
     override fun onRegisterSuccess(t: UserInfo) {
         toast("注册成功")

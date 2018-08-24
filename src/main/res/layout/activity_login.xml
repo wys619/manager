@@ -42,7 +42,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="-40dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/date_pick_white"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
 
@@ -171,7 +171,7 @@
             app:placeholderImage="@drawable/ic_user_head_default"
             app:placeholderImageScaleType="fitCenter"
             app:roundAsCircle="true"
-            app:roundingBorderColor="@color/white"
+            app:roundingBorderColor="@color/date_pick_white"
             app:roundingBorderWidth="2dp" />
 
 

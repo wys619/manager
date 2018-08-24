@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootView"
     android:background="@color/color_bg">
 
 
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="-40dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/date_pick_white"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
 
@@ -53,7 +53,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
 
                     <cn.woyeshi.base.views.InputLayoutView
                         android:id="@+id/inputLayout1"
@@ -67,10 +68,13 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@color/line_color" />
 
 
                     <LinearLayout
+                        android:id="@+id/llSelectGender"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:background="@drawable/selector_bg_trans_gray"
@@ -92,15 +96,17 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvGender"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingLeft="17dp"
-                            android:text="帅哥" />
+                            android:text="@string/string_to_choose" />
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
+                            android:layout_marginRight="16dp"
                             android:src="@drawable/ic_arrow_right" />
 
 
@@ -109,9 +115,12 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@color/line_color" />
 
                     <LinearLayout
+                        android:id="@+id/llSelectBirthday"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:background="@drawable/selector_bg_trans_gray"
@@ -133,15 +142,17 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvBirthday"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingLeft="17dp"
-                            android:text="1995-09-14" />
+                            android:text="@string/string_to_choose" />
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
+                            android:layout_marginRight="16dp"
                             android:src="@drawable/ic_arrow_right" />
 
 
@@ -150,6 +161,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@color/line_color" />
 
                     <cn.woyeshi.base.views.InputLayoutView
@@ -163,6 +176,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:background="@color/line_color" />
 
 
@@ -200,7 +215,7 @@
             app:placeholderImage="@drawable/ic_user_choose_head"
             app:placeholderImageScaleType="fitCenter"
             app:roundAsCircle="true"
-            app:roundingBorderColor="@color/white"
+            app:roundingBorderColor="@color/date_pick_white"
             app:roundingBorderWidth="2dp" />
 
 

@@ -12,7 +12,7 @@ import android.support.v4.content.FileProvider
 import android.widget.TextView
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.base.dialogs.BottomOptionDialog
-//import cn.woyeshi.date_picker.DatePicker
+import cn.woyeshi.datePicker.DatePicker
 import cn.woyeshi.entity.utils.UriToFile
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
@@ -53,9 +53,6 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
 
     private fun initView() {
         sdvHeader.setOnClickListener {
-            //            DatePicker.showPicker(this, rootView) { result ->
-//                toast(result)
-//            }
             BottomOptionDialog(this, listOf(getString(R.string.string_album), getString(R.string.string_take_photo))) { result ->
                 when (result) {
                     getString(R.string.string_album) -> {       //从相册选择
@@ -66,6 +63,14 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
                     }
                 }
             }.show()
+        }
+        llSelectBirthday.setOnClickListener {
+            DatePicker.showPicker(this) { result ->
+                tvBirthday.text = result
+            }
+        }
+        llSelectGender.setOnClickListener {
+
         }
     }
 

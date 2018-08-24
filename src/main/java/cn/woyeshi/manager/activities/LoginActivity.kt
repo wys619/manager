@@ -15,19 +15,27 @@ import cn.woyeshi.entity.utils.Logger
 import cn.woyeshi.entity.utils.MD5
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
-import cn.woyeshi.presenterimpl.presenters.ILoginView
-import cn.woyeshi.presenterimpl.presenters.LoginPresenter
+import cn.woyeshi.presenterimpl.presenters.IUserView
+import cn.woyeshi.presenterimpl.presenters.UserPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class LoginActivity : BaseActivity(), ILoginView {
+class LoginActivity : BaseActivity(), IUserView {
+    override fun onRegisterSuccess(t: UserInfo) {
+
+
+    }
+
+    override fun onUpdateUserSuccess() {
+
+    }
 
     companion object {
         val REQUEST_CODE_TO_FIND_PWD_ACTIVITY = 1001
         val REQUEST_CODE_TO_REGISTER_ACTIVITY = 1002
     }
 
-    private var loginPresenter: LoginPresenter<ILoginView> = LoginPresenter(this)
+    private var userPresenter: UserPresenter<IUserView> = UserPresenter(this)
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_login
@@ -71,7 +79,7 @@ class LoginActivity : BaseActivity(), ILoginView {
 
     private fun toLogin(userName: String, pwd: String) {
         showLoading(getString(R.string.hint_login_ing), false)
-        loginPresenter.login(userName, pwd)
+        userPresenter.login(userName, pwd)
     }
 
     //登录成功
@@ -94,7 +102,7 @@ class LoginActivity : BaseActivity(), ILoginView {
                 REQUEST_CODE_TO_REGISTER_ACTIVITY -> {          //注册界面回调
                     val userInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
                     if (userInfo != null) {
-                        loginPresenter.login(userInfo.userName, userInfo.password)
+                        userPresenter.login(userInfo.userName, userInfo.password)
                     }
                 }
             }
@@ -102,7 +110,7 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
     override fun onDestroy() {
-        loginPresenter.onDestroy()
+        userPresenter.onDestroy()
         hideLoading()
         super.onDestroy()
     }
