@@ -15,13 +15,15 @@ import cn.woyeshi.base.dialogs.BottomOptionDialog
 import cn.woyeshi.entity.utils.UriToFile
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.utils.Navigation
+import cn.woyeshi.presenterimpl.presenters.FileUploadPresenter
+import cn.woyeshi.presenterimpl.presenters.IFileUploadView
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_register_next.*
 import java.io.File
 import java.net.URLDecoder
 
 
-class RegisterNextActivity : BaseActivity() {
+class RegisterNextActivity : BaseActivity(), IFileUploadView {
 
     private val REQUEST_PICK_UP_PHOTO = 1001
     private val REQUEST_TAKE_PHOTO = 1002
@@ -29,6 +31,8 @@ class RegisterNextActivity : BaseActivity() {
     private val REQUEST_PERMISSION_CAMERA = 1003
 
     private var tempFile: File? = null                    //拍照的uri
+
+    private val fileUploadPresenter by lazy { FileUploadPresenter(this) }
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_register_next
@@ -132,7 +136,9 @@ class RegisterNextActivity : BaseActivity() {
                         if (resultUri != null) {
                             sdvHeader.setImageURI(resultUri, this)
                             val file = UriToFile.getFileByUri(this, resultUri)
-
+                            if (file != null && file.exists()) {
+                                fileUploadPresenter.uploadImage(file)
+                            }
                         } else {
                             onImageError()
                         }
@@ -145,6 +151,14 @@ class RegisterNextActivity : BaseActivity() {
             onImageError()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onUploadSuccess(url: String) {
+        toast(url)
+    }
+
+    override fun onUploadFail() {
+
     }
 
     private fun onImageError() {
