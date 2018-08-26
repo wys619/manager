@@ -60,8 +60,9 @@
                         android:id="@+id/inputLayout1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
                         app:hint="设置一个昵称吧~"
-                        app:inputType="number"
                         app:maxLength="11"
                         app:title="昵称：" />
 

@@ -27,4 +27,6 @@
     <string name="text_to_open">去开启</string>
     <string name="string_get_image_error">图片读取失败！</string>
     <string name="string_to_choose">请选择</string>
+    <string name="string_male">男</string>
+    <string name="string_female">女</string>
 </resources>

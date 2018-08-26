@@ -9,12 +9,16 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
+import android.text.Editable
+import android.text.TextUtils
 import android.widget.TextView
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.base.dialogs.BottomOptionDialog
 import cn.woyeshi.datePicker.DatePicker
 import cn.woyeshi.entity.utils.UriToFile
 import cn.woyeshi.manager.R
+import cn.woyeshi.manager.dialogs.GenderSelectDialog
+import cn.woyeshi.manager.utils.MyTextWatcher
 import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.presenters.FileUploadPresenter
 import cn.woyeshi.presenterimpl.presenters.IFileUploadView
@@ -32,6 +36,7 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
     private val REQUEST_PERMISSION_CAMERA = 1003
 
     private var tempFile: File? = null                    //拍照的uri
+    private var cropFile: File? = null                    //拍照的uri
 
     private val fileUploadPresenter by lazy { FileUploadPresenter(this) }
 
@@ -67,11 +72,42 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
         llSelectBirthday.setOnClickListener {
             DatePicker.showPicker(this) { result ->
                 tvBirthday.text = result
+                btnLogin.isEnabled = isCommitBtnShouldEnabled()
             }
         }
         llSelectGender.setOnClickListener {
-
+            GenderSelectDialog(this) { gender ->
+                tvGender.text = gender
+                btnLogin.isEnabled = isCommitBtnShouldEnabled()
+            }.show()
         }
+        inputLayout1.addTextWatcher(object : MyTextWatcher() {
+            override fun afterTextChanged(s: Editable?) {
+                super.afterTextChanged(s)
+                btnLogin.isEnabled = isCommitBtnShouldEnabled()
+            }
+        })
+        btnLogin.setOnClickListener {
+            if (cropFile != null && cropFile!!.exists()) {
+                fileUploadPresenter.uploadImage(cropFile!!)
+            }
+        }
+    }
+
+    private fun isCommitBtnShouldEnabled(): Boolean {
+        if (cropFile == null) {
+            return false
+        }
+        if (TextUtils.isEmpty(inputLayout1.getText())) {
+            return false
+        }
+        if (tvGender.text == getString(R.string.string_to_choose)) {
+            return false
+        }
+        if (tvBirthday.text == getText(R.string.string_to_choose)) {
+            return false
+        }
+        return true
     }
 
     private fun toCamera() {
@@ -144,10 +180,8 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
                         val resultUri: Uri? = UCrop.getOutput(data)
                         if (resultUri != null) {
                             sdvHeader.setImageURI(resultUri, this)
-                            val file = UriToFile.getFileByUri(this, resultUri)
-                            if (file != null && file.exists()) {
-                                fileUploadPresenter.uploadImage(file)
-                            }
+                            cropFile = UriToFile.getFileByUri(this, resultUri)
+                            btnLogin.isEnabled = isCommitBtnShouldEnabled()
                         } else {
                             onImageError()
                         }
@@ -163,7 +197,10 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
     }
 
     override fun onUploadSuccess(url: String) {
-        toast(url)
+        val userInfo = getLoginUserInfo()
+        if (userInfo != null) {
+
+        }
     }
 
     override fun onUploadFail() {
