@@ -1,3 +1,7 @@
 <resources>
 
+    <style name="Theme.Splash" parent="ImageTranslucentTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
 </resources>

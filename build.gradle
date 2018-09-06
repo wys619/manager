@@ -55,6 +55,7 @@ dependencies {
     implementation project(':libs')
     implementation project(':lib_ucrop')
     implementation project(':lib_date_picker')
+    implementation project(':lib_map')
 }
 kotlin {
     experimental {

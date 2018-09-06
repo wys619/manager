@@ -25,6 +25,9 @@ import cn.woyeshi.presenterimpl.presenters.FileUploadPresenter
 import cn.woyeshi.presenterimpl.presenters.IFileUploadView
 import cn.woyeshi.presenterimpl.presenters.IUserView
 import cn.woyeshi.presenterimpl.presenters.UserPresenter
+import com.example.lib_map.GaoDeLocation
+import com.example.lib_map.GaoDeLocationResult
+import com.example.lib_map.ILocationCallback
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_register_next.*
 import java.io.File
@@ -53,6 +56,18 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView, IUserView {
         setBackBtnVisibility(false)
         title = getString(R.string.title_complete)
         initView()
+        getLocation()
+    }
+
+    private fun getLocation() {
+        GaoDeLocation.getInstance().startOneTimeLocation(this, object : ILocationCallback {
+            override fun onLocationResult(location: GaoDeLocationResult?) {
+                if (location != null) {
+
+                }
+
+            }
+        })
     }
 
     override fun onBackBtnClick() {
