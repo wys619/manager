@@ -29,4 +29,10 @@
     <string name="string_to_choose">请选择</string>
     <string name="string_male">男</string>
     <string name="string_female">女</string>
+    <string name="string_main_tab">首页</string>
+    <string name="string_task_tab">任务</string>
+    <string name="string_tab_news">消息</string>
+    <string name="string_mine_tab">我的</string>
+    <string name="string_tab_send_task">工具箱</string>
+    <string name="back_press_tips">再按一次退出</string>
 </resources>

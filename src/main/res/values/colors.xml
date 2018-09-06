@@ -4,4 +4,7 @@
     <color name="color_bg">#f5f5f5</color>
     <color name="line_color">#d7d7d7</color>
     <color name="color_line">#ffc9d1d9</color>
+    <color name="color_title_bar">#F8F8F8</color>
+    <color name="color_tab_text">#b4c1d4</color>
+    <color name="red_circle">#fb4142</color>
 </resources>

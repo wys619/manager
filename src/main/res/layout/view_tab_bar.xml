@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/llTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/color_title_bar"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/llMainTab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/selector_bg_trans_gray"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_tab_padding_vertical"
+                android:paddingTop="@dimen/dimen_tab_padding_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbMainTab"
+                    android:layout_width="@dimen/dimen_tab_icon_size"
+                    android:layout_height="@dimen/dimen_tab_icon_size"
+                    android:background="@drawable/selector_main_tab"
+                    android:button="@null"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_main_tab"
+                    android:textColor="@color/color_tab_text"
+                    android:textSize="@dimen/dimen_tab_text_size" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llTaskTab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_trans_gray"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_tab_padding_vertical"
+                android:paddingTop="@dimen/dimen_tab_padding_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbTaskTab"
+                    android:layout_width="@dimen/dimen_tab_icon_size"
+                    android:layout_height="@dimen/dimen_tab_icon_size"
+                    android:background="@drawable/selector_task_tab"
+                    android:button="@null"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_task_tab"
+                    android:textColor="@color/color_tab_text"
+                    android:textSize="@dimen/dimen_tab_text_size" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/llNewsTab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/selector_bg_trans_gray"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_tab_padding_vertical"
+                android:paddingTop="@dimen/dimen_tab_padding_vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/cbNewsTab"
+                        android:layout_width="@dimen/dimen_tab_icon_size"
+                        android:layout_height="@dimen/dimen_tab_icon_size"
+                        android:background="@drawable/selector_news_tab"
+                        android:button="@null"
+                        android:clickable="false" />
+
+                    <View
+                        android:id="@+id/newsRedPoint"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignEnd="@+id/cbNewsTab"
+                        android:layout_alignRight="@+id/cbNewsTab"
+                        android:background="@drawable/shape_circle_red" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_tab_news"
+                    android:textColor="@color/color_tab_text"
+                    android:textSize="@dimen/dimen_tab_text_size" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llMineTab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_trans_gray"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_tab_padding_vertical"
+                android:paddingTop="@dimen/dimen_tab_padding_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbMineTab"
+                    android:layout_width="@dimen/dimen_tab_icon_size"
+                    android:layout_height="@dimen/dimen_tab_icon_size"
+                    android:background="@drawable/selector_home_tab"
+                    android:button="@null"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_mine_tab"
+                    android:textColor="@color/color_tab_text"
+                    android:textSize="@dimen/dimen_tab_text_size" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llSendTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/llTabs"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_tab_padding_vertical">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/icon_paigo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_tab_send_task"
+            android:textColor="@color/color_tab_text"
+            android:textSize="@dimen/dimen_tab_text_size" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

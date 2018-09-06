@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_tab_padding_vertical">5dp</dimen>
+    <dimen name="dimen_tab_icon_size">30dp</dimen>
+    <dimen name="dimen_tab_text_size">10sp</dimen>
+</resources>
