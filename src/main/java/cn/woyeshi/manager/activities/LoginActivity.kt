@@ -73,6 +73,7 @@ class LoginActivity : BaseActivity(), IUserView {
         })
         val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
         if (loginInfo != null) {
+            sdvHeader.setImageURI(loginInfo.avartar)
             toLogin(loginInfo.userName, loginInfo.password)
         }
     }

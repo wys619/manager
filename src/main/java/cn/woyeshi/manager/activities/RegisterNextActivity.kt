@@ -45,6 +45,7 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView, IUserView {
 
     private val fileUploadPresenter by lazy { FileUploadPresenter(this) }
     private val userPresenter by lazy { UserPresenter(this) }
+    private var location: GaoDeLocationResult? = null
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_register_next
@@ -63,9 +64,8 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView, IUserView {
         GaoDeLocation.getInstance().startOneTimeLocation(this, object : ILocationCallback {
             override fun onLocationResult(location: GaoDeLocationResult?) {
                 if (location != null) {
-
+                    this@RegisterNextActivity.location = location
                 }
-
             }
         })
     }
@@ -226,6 +226,9 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView, IUserView {
                 "1"
             } else {
                 "2"
+            }
+            if (location != null) {
+                userInfo.city = location!!.city
             }
             userInfo.birthday = birthday.toString()
             userPresenter.updateUser(userInfo)
