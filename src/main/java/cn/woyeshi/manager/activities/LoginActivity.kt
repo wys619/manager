@@ -71,10 +71,10 @@ class LoginActivity : BaseActivity(), IUserView {
             }
             toLogin(userName, MD5.getMD5(password.toByteArray())!!)
         })
-//        val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
-//        if (loginInfo != null) {
-//            toLogin(loginInfo.userName, loginInfo.password)
-//        }
+        val loginInfo = readFromSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, UserInfo::class.java)
+        if (loginInfo != null) {
+            toLogin(loginInfo.userName, loginInfo.password)
+        }
     }
 
     private fun toLogin(userName: String, pwd: String) {
@@ -88,7 +88,11 @@ class LoginActivity : BaseActivity(), IUserView {
             Logger.i(TAG, "onLoginRequestSuccess() -> $loginInfo")
             saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, loginInfo)
             toast(getString(R.string.string_login_success))
-            Navigation.toMainActivity(this)
+            if (TextUtils.isEmpty(loginInfo.avartar)) {
+                Navigation.toNextRegisterActivity(this)
+            } else {
+                Navigation.toMainActivity(this)
+            }
             finish()
         }, 1000L)
     }

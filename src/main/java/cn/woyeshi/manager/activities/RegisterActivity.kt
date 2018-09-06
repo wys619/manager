@@ -10,6 +10,7 @@ import android.widget.TextView
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.entity.Constants
 import cn.woyeshi.entity.beans.manager.UserInfo
+import cn.woyeshi.entity.utils.ContextHolder
 import cn.woyeshi.entity.utils.MD5
 import cn.woyeshi.entity.utils.PhoneUtils
 import cn.woyeshi.manager.R
@@ -167,7 +168,7 @@ class RegisterActivity : BaseActivity(), IUserView, IRegisterView {
     }
 
 
-    override fun onRegisterSuccess(t: UserInfo) {
+    override fun onRegisterSuccess(t: UserInfo) {//0CB53E572AF9E057C0FE11062EBD050E
         toast("注册成功")
         saveToSP(Constants.SPKeys.KEY_LOGIN_USER_INFO, t)
         Navigation.toNextRegisterActivity(this)

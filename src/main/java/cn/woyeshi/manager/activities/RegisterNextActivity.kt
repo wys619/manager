@@ -15,6 +15,7 @@ import android.widget.TextView
 import cn.woyeshi.base.activities.BaseActivity
 import cn.woyeshi.base.dialogs.BottomOptionDialog
 import cn.woyeshi.datePicker.DatePicker
+import cn.woyeshi.entity.beans.manager.UserInfo
 import cn.woyeshi.entity.utils.UriToFile
 import cn.woyeshi.manager.R
 import cn.woyeshi.manager.dialogs.GenderSelectDialog
@@ -22,14 +23,15 @@ import cn.woyeshi.manager.utils.MyTextWatcher
 import cn.woyeshi.manager.utils.Navigation
 import cn.woyeshi.presenterimpl.presenters.FileUploadPresenter
 import cn.woyeshi.presenterimpl.presenters.IFileUploadView
+import cn.woyeshi.presenterimpl.presenters.IUserView
+import cn.woyeshi.presenterimpl.presenters.UserPresenter
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_register_next.*
 import java.io.File
 import java.net.URLDecoder
 
 
-class RegisterNextActivity : BaseActivity(), IFileUploadView {
-
+class RegisterNextActivity : BaseActivity(), IFileUploadView, IUserView {
     private val REQUEST_PICK_UP_PHOTO = 1001
     private val REQUEST_TAKE_PHOTO = 1002
 
@@ -39,6 +41,7 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
     private var cropFile: File? = null                    //拍照的uri
 
     private val fileUploadPresenter by lazy { FileUploadPresenter(this) }
+    private val userPresenter by lazy { UserPresenter(this) }
 
     override fun getContentLayoutID(): Int {
         return R.layout.activity_register_next
@@ -70,8 +73,8 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
             }.show()
         }
         llSelectBirthday.setOnClickListener {
-            DatePicker.showPicker(this) { result ->
-                tvBirthday.text = result
+            DatePicker.showPicker(this) { y, m, d ->
+                tvBirthday.text = String.format("%d-%02d-%02d", y, m, d)
                 btnLogin.isEnabled = isCommitBtnShouldEnabled()
             }
         }
@@ -148,7 +151,7 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
 
     //点击跳过
     override fun onEditBtnClick(view: TextView) {
-        Navigation.toMainActivity(this)
+        toMainActivity()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -199,7 +202,18 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
     override fun onUploadSuccess(url: String) {
         val userInfo = getLoginUserInfo()
         if (userInfo != null) {
-
+            userInfo.avartar = url
+            val nickname = inputLayout1.getText()
+            val gender = tvGender.text
+            val birthday = "${tvBirthday.text} 00:00:00"
+            userInfo.nickname = nickname
+            userInfo.gender = if (gender == "男") {
+                "1"
+            } else {
+                "2"
+            }
+            userInfo.birthday = birthday.toString()
+            userPresenter.updateUser(userInfo)
         }
     }
 
@@ -233,4 +247,21 @@ class RegisterNextActivity : BaseActivity(), IFileUploadView {
         }
     }
 
+    override fun onLoginRequestSuccess(loginInfo: UserInfo) {
+
+    }
+
+    override fun onRegisterSuccess(t: UserInfo) {
+
+    }
+
+    override fun onUpdateUserSuccess() {
+        toast("用户信息提交成功！")
+        toMainActivity()
+    }
+
+    fun toMainActivity() {
+        Navigation.toMainActivity(this)
+        finish()
+    }
 }

@@ -112,7 +112,7 @@ class SplashActivity : BaseActivity() {
             if (isFinishing) {
                 return@postDelayed
             }
-            Navigation.toNextRegisterActivity(this)
+            Navigation.toLoginActivity(this)
             finish()
         }, 1000)
     }
